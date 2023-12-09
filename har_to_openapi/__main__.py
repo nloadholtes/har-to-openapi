@@ -1,4 +1,6 @@
-import sys, json
+import json
+import sys
+
 from converter import har_to_openapi, validate_openapi_spec
 
 if __name__ == "__main__":
@@ -13,5 +15,5 @@ if __name__ == "__main__":
 
     # Uncomment the line below to validate the generated OpenAPI spec
     validate_openapi_spec(openapi_spec)
-   # with open(sys.argv[1] + ".openapi_spec.json", "w") as f:
-   #     json.dump(f, openapi_spec)
+# with open(sys.argv[1] + ".openapi_spec.json", "w") as f:
+#     json.dump(f, openapi_spec)

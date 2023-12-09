@@ -25,9 +25,8 @@ exclude = '''
 '''
 
 [tool.isort]
-profile = "pyproject.toml"
-known_third_party = ["your_third_party_dependencies"]
-known_first_party = ["your_project"]
+profile = "black"
+known_first_party = ["har_to_api"]
 
 [tool.flake8]
 max-line-length = 100
@@ -64,6 +63,6 @@ dev = [
 
 [options.entry_points]
 console_scripts = [
-    "your_command = your_project.module:main",
+    "har_to_openapi = har_to_openapi:main",
 ]
 
