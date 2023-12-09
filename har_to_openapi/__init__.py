@@ -11,7 +11,7 @@ def har_to_openapi(har_file_path):
         har_data = json.load(har_file)
 
     parser = HarParser(har_data)
-    entries = parser.har_data.get("log", {}).get("entries", [])
+    entries = parser.har_data.get("entries", [])
 
     openapi_spec = {
         "openapi": "3.0.0",
