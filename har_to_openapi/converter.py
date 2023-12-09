@@ -63,4 +63,7 @@ if __name__ == "__main__":
     print(json.dumps(openapi_spec, indent=2))
 
     # Uncomment the line below to validate the generated OpenAPI spec
-    # validate_openapi_spec(openapi_spec)
+    validate_openapi_spec(openapi_spec)
+   # with open(sys.argv[1] + ".openapi_spec.json", "w") as f:
+   #     json.dump(f, openapi_spec)
+
