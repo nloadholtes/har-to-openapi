@@ -1,5 +1,6 @@
 import json
 import requests
+import sys
 from haralyzer import HarParser
 from openapi_schema_validator import validate
 
@@ -8,7 +9,7 @@ def har_to_openapi(har_file_path):
         har_data = json.load(har_file)
 
     parser = HarParser(har_data)
-    entries = parser.har_data['log']['entries']
+    entries = parser.har_data.get('log', {}).get('entries', [])
 
     openapi_spec = {
         'openapi': '3.0.0',
@@ -46,7 +47,11 @@ def validate_openapi_spec(openapi_spec):
     validate(instance=openapi_spec, schema=schema_data)
 
 if __name__ == "__main__":
-    har_file_path = 'path/to/your/file.har'
+    if len(sys.argv) < 2:
+        print("Usage: python har_to_openapi <path-to-your-file>")
+        sys.exit(1)
+
+    har_file_path = sys.argv[1]  # 'path/to/your/file.har'
     
     openapi_spec = har_to_openapi(har_file_path)
     print(json.dumps(openapi_spec, indent=2))
