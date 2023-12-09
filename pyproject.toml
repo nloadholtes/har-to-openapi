@@ -36,10 +36,6 @@ ignore = ["E203", "E501", "W503"]
 [tool.pytest]
 python_files = "tests/*.py"
 
-[build-system]
-requires = ["setuptools", "wheel"]
-build-backend = "setuptools.build_meta"
-
 [metadata]
 name = "har-to-openapi"
 version = "0.1.0"
@@ -54,11 +50,6 @@ classifiers = [
 ]
 keywords = "your, project, keywords"
 
-[options]
-packages = find:
-install_requires = [
-    "your_dependency",
-]
 
 [options.packages.find]
 where = "src"
