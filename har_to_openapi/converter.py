@@ -24,6 +24,7 @@ def har_to_openapi(har_file_path):
 
     for entry in entries:
         request = entry["request"]
+        response = entry.get("response", {})
         method = request["method"].lower()
         url = request["url"]
 
@@ -31,14 +32,17 @@ def har_to_openapi(har_file_path):
 
         if path not in openapi_spec["paths"]:
             openapi_spec["paths"][path] = {}
-
-        openapi_spec["paths"][path][method] = {
-            "responses": {
-                "200": {
-                    "description": "Successful response",
-                },
+        if not response:
+            continue
+        if method not in openapi_spec["paths"][path]:
+            openapi_spec["paths"][path][method] = {"responses": {}}
+        responses = openapi_spec["paths"][path][method]["responses"]
+        responses[response["status"]] = (
+            {
+                "description": response.get("content"),
             },
-        }
+        )
+        openapi_spec["paths"][path][method]["responses"] = responses
 
     return openapi_spec
 
@@ -50,4 +54,3 @@ def validate_openapi_spec(openapi_spec):
     schema_data = requests.get(schema_url).json()
 
     validate(instance=openapi_spec, schema=schema_data)
-
