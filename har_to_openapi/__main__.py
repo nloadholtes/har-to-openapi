@@ -15,6 +15,6 @@ if __name__ == "__main__":
 
     # Uncomment the line below to validate the generated OpenAPI spec
     # Commented out because of https://github.com/nloadholtes/har-to-openapi/issues/3
-    # validate_openapi_spec(openapi_spec)
+    validate_openapi_spec(openapi_spec)
 # with open(sys.argv[1] + ".openapi_spec.json", "w") as f:
 #     json.dump(f, openapi_spec)
