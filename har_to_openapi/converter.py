@@ -28,7 +28,7 @@ def har_to_openapi(har_file_path):
         method = request["method"].lower()
         url = request["url"]
 
-        path = url.replace("http://", "").replace("https://", "").split("/", 1)[-1]
+        path = "/" + url.replace("http://", "").replace("https://", "").split("/", 1)[-1]
 
         if path not in openapi_spec["paths"]:
             openapi_spec["paths"][path] = {}
@@ -37,11 +37,10 @@ def har_to_openapi(har_file_path):
         if method not in openapi_spec["paths"][path]:
             openapi_spec["paths"][path][method] = {"responses": {}}
         responses = openapi_spec["paths"][path][method]["responses"]
-        responses[response["status"]] = (
-            {
-                "description": response.get("content"),
-            },
-        )
+        responses[response["status"]] = {
+            "description": json.dumps(response.get("content")),
+        }
+
         openapi_spec["paths"][path][method]["responses"] = responses
 
     return openapi_spec
