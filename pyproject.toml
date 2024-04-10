@@ -2,8 +2,7 @@
 name = "har-to-openapi"
 version = "0.1.0"
 description = "Generate an OpenAPI spec from a HAR file"
-authors = ["Nick Loadholtes <nick@ironboundsoftware.com>"]
-edition = "2023"
+authors = [{ name="Nick Loadholtes", email="nick@ironboundsoftware.com"}]
 
 [build-system]
 requires = ["setuptools", "wheel"]
